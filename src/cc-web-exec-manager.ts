@@ -1,4 +1,3 @@
-import {inIFrame} from "./utils";
 import {CCWebExec} from "./cc-web-exec";
 
 export class CCWebExecManager extends CCWebExec {
