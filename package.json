@@ -1,6 +1,6 @@
 {
   "name": "@exlinc/cc-web-exec-sdk",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "iframe comms sdk",
   "main": "dist/cc-web-exec-sdk.js",
   "types": "dist/cc-web-exec-sdk.d.ts",

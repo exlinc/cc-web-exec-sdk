@@ -8,9 +8,9 @@ export class CCWebExec {
     private handlers: { [eventKey: string]: { [handlerId: string]: MessageHandlerFunc<any>} } = {}
     private readonly onMsgFunc;
 
-    constructor(private elementRef: any, public readonly frameId: string) {
+    constructor(private readonly targetElement: any, public readonly frameId: string) {
         this.onMsgFunc = this.onMessage.bind(this);
-        bindEvent(this.elementRef, 'message', this.onMsgFunc);
+        bindEvent(window, 'message', this.onMsgFunc);
     }
 
     public dispose() {
@@ -19,7 +19,7 @@ export class CCWebExec {
         }
         this.zombie = true;
         this.handlers = {};
-        unbindEvent(this.elementRef, 'message', this.onMsgFunc)
+        unbindEvent(window, 'message', this.onMsgFunc)
     }
 
     public subscribe<T>(event: string, handler: MessageHandlerFunc<T>): string {
@@ -53,11 +53,7 @@ export class CCWebExec {
 
     public sendMessage(event: string, payload: any) {
         this.assertNotZombie();
-        if (!window.parent) {
-            logger.warn('');
-            return;
-        }
-        window.parent.postMessage(MESSAGE_DATA_PREFIX + JSON.stringify({
+        this.targetElement.postMessage(MESSAGE_DATA_PREFIX + JSON.stringify({
             frameId: this.frameId,
             event,
             payload
