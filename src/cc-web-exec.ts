@@ -5,7 +5,7 @@ import {bindEvent, randomString, unbindEvent} from "./utils";
 
 export class CCWebExec {
     private zombie = false;
-    private handlers: { [eventKey: string]: { [handlerId: string]: MessageHandlerFunc} } = {}
+    private handlers: { [eventKey: string]: { [handlerId: string]: MessageHandlerFunc<any>} } = {}
     private readonly onMsgFunc;
 
     constructor(private elementRef: any, public readonly frameId: string) {
@@ -22,7 +22,7 @@ export class CCWebExec {
         unbindEvent(this.elementRef, 'message', this.onMsgFunc)
     }
 
-    public subscribe(event: string, handler: MessageHandlerFunc): string {
+    public subscribe<T>(event: string, handler: MessageHandlerFunc<T>): string {
         const hId = randomString(16);
         if (!event || typeof event !== 'string') {
             throw new Error('Invalid/missing event key on subscribe call: ' + event);

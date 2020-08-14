@@ -20,4 +20,4 @@ export interface ILogOutput {
     data: string;
 }
 
-export type MessageHandlerFunc = (event: string, payload: any) => void;
+export type MessageHandlerFunc<T> = (event: string, payload: T) => void;
