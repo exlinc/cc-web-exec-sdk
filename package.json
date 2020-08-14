@@ -1,7 +1,10 @@
 {
-  "name": "cc-web-exec-sdk",
+  "name": "@exlinc/cc-web-exec-sdk",
   "version": "1.0.0",
   "description": "iframe comms sdk",
+  "main": "dist/cc-web-exec-sdk.js",
+  "types": "dist/cc-web-exec-sdk.d.ts",
+  "prepublish": "tsc",
   "scripts": {
     "start": "npm run build",
     "build": "tsc",
