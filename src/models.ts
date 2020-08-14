@@ -6,6 +6,7 @@ export interface IMessageWrapper {
 
 export interface IExecuteCodePayload {
     defaultFileName: string;
+    language: string;
     files: { [ key: string ]: string };
     stdin: string;
 }
