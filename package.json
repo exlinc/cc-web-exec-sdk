@@ -1,13 +1,16 @@
 {
   "name": "@exlinc/cc-web-exec-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "iframe comms sdk",
   "main": "dist/cc-web-exec-sdk.js",
   "types": "dist/cc-web-exec-sdk.d.ts",
-  "prepublish": "tsc",
+  "prepublish": "npm run build",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "start": "npm run build",
-    "build": "tsc",
+    "build": "tsc && tsc --p tsconfig.bundle.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
