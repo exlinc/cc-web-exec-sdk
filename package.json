@@ -1,0 +1,22 @@
+{
+  "name": "cc-web-exec-sdk",
+  "version": "1.0.0",
+  "description": "iframe comms sdk",
+  "scripts": {
+    "start": "npm run build",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exlinc/cc-web-exec-sdk.git"
+  },
+  "author": "EXL Inc.",
+  "bugs": {
+    "url": "https://github.com/exlinc/cc-web-exec-sdk/issues"
+  },
+  "homepage": "https://github.com/exlinc/cc-web-exec-sdk#readme",
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}
