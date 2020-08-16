@@ -4,11 +4,27 @@ SDK for building and communicating with web execution environments that are embe
 
 ## Usage
 
-First get the distribution:
+First get the distribution: `npm install @exlinc/cc-web-exec-sdk`
 
-* NPM: `npm install @exlinc/cc-web-exec-sdk`
+All web exec implementations, should create a single instance of `CCWebExecClient` in their iframe and then implement their event listeners/senders on that instance.
 
-**USAGE DOCS TODO**
+For an example implementation in plain JS:
+
+* `examples/js-demo/iframe.html` >>> This is an example implementation of `CCWebExecClient` (probably what you need)
+
+* `examples/js-demo/index.html` >>> This is an example implementation of the `CCWebExecManager` for example/testing purposes ONLY. This is implemented by Coding Rooms -- your app only needs to implement the client-side of this framework. 
+
+To play with the JS example, load `examples/js-demo/index.html` in your browser. It uses a relative path to load in the iframe.
+
+## TypeScript Usage
+
+The simplest+safest way to implement this library for production use is via the TypeScript interface. Types are provided in the NPM distribution. 
+
+## Supported Event Types
+
+A list of the supported event types are available here: `src/consts.ts`
+
+A list of the supported event payloads are available here: `src/models.ts`
 
 ## Development Setup
 

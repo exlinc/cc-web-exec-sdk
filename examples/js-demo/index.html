@@ -1,0 +1,67 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+            integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg=="
+            crossorigin="anonymous"></script>
+    <script language="javascript">
+      requirejs.config({
+        paths: {
+          'cc-web-exec-manager': 'https://unpkg.com/@exlinc/cc-web-exec-sdk@1.0.6/dist/cc-web-exec-sdk'
+        },
+      });
+
+      requirejs(['cc-web-exec-manager'],
+        function (webExecSDK) {
+          window.webExecManager = new webExecSDK.CCWebExecManager('myFrameIdSetMe');
+        }
+      );
+
+      function submitForm() {
+        if (!window.webExecManager) {
+          alert('Web Exec Manager is missing/not yet loaded');
+          return;
+        }
+
+        // set up JSON data object
+        var fileName = document.getElementById("filename2").value;
+        var fileContent = document.getElementById("filecontent").value
+        var files = {}; // Files object
+        files[fileName] = fileContent; // add { filename: filecontent } to object
+        var payload = {
+          language: 'demo-lang',
+          defaultFileName: fileName,
+          files: files,
+          stdin: '',
+        };
+        console.log("about to send: " + payload);
+
+        try {
+          window.webExecManager.sendMessage('execute_code', payload);
+        } catch (err) {
+          console.log("error sending execute code message: ", err);
+        }
+      }
+    </script>
+</head>
+<body>
+<h1>iframe test</h1>
+<form onsubmit="submitForm(); return false;">
+    Filename: <input type="text" id="filename2" value="file.py"/><br/>
+    <textarea style="width:600px; font-family:'Courier New', Courier" rows=5 id="filecontent">print()</textarea><br/>
+    <input type=submit>
+</form>
+
+<br/><br/>
+
+<!-- Note the id if the iframe element must be in the form of "cc-embed-frameId" where
+     there "frameId" is equal to the value of the "?frameId=" query param and the value set in
+     the CCWebExecManager constructor call, UNLESS you use the extended form of the CCWebExecManager
+     constructor where you specify the id of the iframe element, e.g.,
+     `new CCWebExecManager('myFrameIdSetMe', 'nonStandardIdOfMyIFrameElement')`
+ -->
+<iframe id="cc-embed-myFrameIdSetMe" src="iframe.html?frameId=myFrameIdSetMe"
+        style="height:400px;width:600px;border-width: 2px"
+        title="Run Code"></iframe>
+
+</body>
+</html>

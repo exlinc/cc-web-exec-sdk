@@ -1,0 +1,45 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+            integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg=="
+            crossorigin="anonymous"></script>
+    <script language="javascript">
+      requirejs.config({
+        paths: {
+          'cc-web-exec-client': 'https://unpkg.com/@exlinc/cc-web-exec-sdk@1.0.6/dist/cc-web-exec-sdk'
+        },
+      });
+
+      requirejs(['cc-web-exec-client'],
+        function (webExecSDK) {
+          window.webExecClient = new webExecSDK.CCWebExecClient();
+          initApp();
+        }
+      );
+
+      function initApp() {
+        window.webExecClient.subscribe('execute_code', function (event, payload) {
+          console.log(event, payload);
+          writeCodeExecRequestPayloadToDOM(payload);
+        });
+      }
+
+      function writeCodeExecRequestPayloadToDOM(payload) {
+        var files = payload.files;
+        for (var key in files) {
+          if (files.hasOwnProperty(key)) {
+            document.getElementById("mycontent").innerHTML += "<b>File:</b> " + key + "<br />\n";
+            document.getElementById("mycontent").innerHTML += "<b>Code:</b><br />\n";
+            document.getElementById("mycontent").innerHTML += "<blockquote style=\"font-family:'Courier New', Courier\">" + files[key] + "</blockquote>\n";
+          }
+        }
+        return true;
+      }
+    </script>
+</head>
+<body>
+<h1 align=center>iframe content</h1>
+<div id="mycontent">
+</div>
+</body>
+</html>
