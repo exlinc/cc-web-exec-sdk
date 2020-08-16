@@ -1,7 +1,7 @@
 {
   "name": "@exlinc/cc-web-exec-sdk",
-  "version": "1.0.5",
-  "description": "iframe comms sdk",
+  "version": "1.0.6",
+  "description": "Coding Rooms web exec environment iframe app SDK",
   "main": "dist/cc-web-exec-sdk.js",
   "types": "dist/cc-web-exec-sdk.d.ts",
   "prepublish": "npm run build",

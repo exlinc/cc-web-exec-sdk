@@ -8,7 +8,7 @@ export class CCWebExec {
     private handlers: { [eventKey: string]: { [handlerId: string]: MessageHandlerFunc<any>} } = {}
     private readonly onMsgFunc;
 
-    constructor(private readonly targetElement: any, public readonly frameId: string) {
+    constructor(private readonly targetElementGetter: () => Window, public readonly frameId: string) {
         this.onMsgFunc = this.onMessage.bind(this);
         bindEvent(window, 'message', this.onMsgFunc);
     }
@@ -53,7 +53,7 @@ export class CCWebExec {
 
     public sendMessage(event: string, payload: any) {
         this.assertNotZombie();
-        this.targetElement.postMessage(MESSAGE_DATA_PREFIX + JSON.stringify({
+        this.targetElementGetter().postMessage(MESSAGE_DATA_PREFIX + JSON.stringify({
             frameId: this.frameId,
             event,
             payload
