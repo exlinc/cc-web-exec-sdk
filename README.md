@@ -16,6 +16,8 @@ For an example implementation in plain JS:
 
 To play with the JS example, load `examples/js-demo/index.html` in your browser. It uses a relative path to load in the iframe.
 
+A CDN for plain JS implementations/demos is available via UNPKG: `https://unpkg.com/@exlinc/cc-web-exec-sdk@1.0.6/dist/cc-web-exec-sdk.js` (not really recommended for production; better to package yourself)
+
 ## TypeScript Usage
 
 The simplest+safest way to implement this library for production use is via the TypeScript interface. Types are provided in the NPM distribution. 
