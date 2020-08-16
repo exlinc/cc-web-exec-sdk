@@ -18,6 +18,10 @@
       );
 
       function initApp() {
+        // NOTE: the subscribe call returns a string id for this subscriber that can be passed to the
+        //       unsubscribe function to drop this particular subscriber. This is not necessary if you call
+        //       the `.dispose()` function or you plan to have your app 'disposed' automatically when the iframe
+        //       is removed by the parent.
         window.webExecClient.subscribe('execute_code', function (event, payload) {
           console.log(event, payload);
           writeCodeExecRequestPayloadToDOM(payload);
